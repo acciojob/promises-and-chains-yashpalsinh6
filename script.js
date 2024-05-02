@@ -1,29 +1,31 @@
-//your JS code here. If required.
-function submitForm() {
-  const name = document.getElementById('name').value;
-  const age = parseInt(document.getElementById('age').value, 10);
-  
-  // if (name.trim() === "" || isNaN(age)) {
-  //   alert("Both name and age fields must be filled out.");
-  //   return;
-  // }
-
-  ageValidationPromise(name, age).then(message => {
-    alert(message);
-  }).catch(message => {
-    alert(message);
-  });
+let formbutton = document.getElementById("btn");
+function promiseApi1(name , age)
+{
+ return new Promise((resolve , reject) => {
+        setTimeout(() => {
+            if(age > 18)
+            {
+                resolve(
+                    alert(`Welcome, ${name}. You can vote.`)
+                    // console.log(`You can vote , ${name}`)
+                )
+            }
+            else
+            {
+                 alert(`Oh sorry ${name}. You aren't old enough.`)
+            }
+        } , 4000)
+ })
 }
-
-function ageValidationPromise(name, age) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (age >= 18) {
-        resolve(`Welcome, ${name}. You can vote.`);
-      } else {
-        reject(`Oh sorry, ${name}. You aren't old enough.`);
-      }
-    }, 4000); // wait for 4 seconds
-  });
-}
-
+formbutton.addEventListener("click" , (event) => {
+    event.preventDefault();
+    let nameinput = document.getElementById("name").value;
+    let ageinput = document.getElementById("age").value;
+    if (nameinput == "" && ageinput == "") {
+        alert("Please enter valid details")
+    }
+    else
+    {
+        promiseApi1(nameinput , ageinput);
+    }
+})
